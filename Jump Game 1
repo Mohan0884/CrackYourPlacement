@@ -1,0 +1,39 @@
+//DP and Greedy both works most efficient is greedy from back
+
+class Solution {
+    public boolean canJump(int[] nums) {
+        // int dp[]=new int[nums.length+1];
+        // Arrays.fill(dp,-1);
+        // return solve(0,nums,nums.length,dp);
+        int n=nums.length-1;
+        for(int i=nums.length-2;i>=0;i--){
+            if(n-i<=nums[i]){
+                n=i;
+            }
+        }
+        return n==0;
+    }
+    public static boolean solve(int ind,int nums[],int n,int dp[]){
+        if(ind>=n-1){
+            return true;
+        }
+        if(dp[ind]!=-1){
+            if(dp[ind]==1){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        if(nums[ind]==0){
+            return false;
+        }
+        for(int i=1;i<=nums[ind];i++){
+            if(solve(ind+i,nums,n,dp)){
+                dp[ind+i]=1;
+                return true;
+            }
+        }
+        dp[ind]=0;
+        return false;
+    }
+}
