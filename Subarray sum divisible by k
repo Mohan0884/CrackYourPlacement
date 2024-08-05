@@ -1,0 +1,25 @@
+//Prefix SUm with HashTable
+
+class Solution {
+    public int subarraysDivByK(int[] nums, int k) {
+        HashMap<Integer,Integer>map=new HashMap<>();
+        int currSum=0;
+        int sol=0;
+        map.put(0,1);
+        for(int i=0;i<nums.length;i++){
+            currSum+=nums[i];
+            int z=currSum%k;
+            if(z<0){
+                z=z+k;
+            }
+            if(map.containsKey(z)){
+                sol+=map.get(z);
+                
+            }
+             map.put(z,map.getOrDefault(z,0)+1);
+            
+           
+        }
+        return sol;
+    }
+}
